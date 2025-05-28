@@ -8,4 +8,4 @@ func collect_item():
 	queue_free()
 
 func get_texture() -> CompressedTexture2D:
-	return $Sprited2D.texture
+	return $Sprite2D.texture

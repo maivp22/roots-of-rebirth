@@ -47,6 +47,7 @@ var tween: Tween
 
 func _ready():
 	start(0)
+	MusicaGlobal.music_player.stop()
 	
 # Empieza una escena cinematográfica
 func start(id):
@@ -70,6 +71,7 @@ func speak():
 	var animation_speed = 0.05 * label.text.length()
 	tween.tween_property(label,"visible_ratio",1,animation_speed)
 	dialog_index += 1
+	
 	
 
 func next():

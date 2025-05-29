@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://c41q17p0ekl10"]
-
-[ext_resource type="Script" uid="uid://6mh47h0wlpnn" path="res://Scenes/window_display_button.gd" id="2_b2b6i"]
-
-[node name="Window_Display_Button"]
-script = ExtResource("2_b2b6i")

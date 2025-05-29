@@ -1,7 +1,8 @@
-class_name OptionsMenu
+class_name Settings_Tab_Container
 extends Control
 
 @onready var exit_button: Button = $Exit_Button
+
 
 
 
@@ -10,6 +11,7 @@ signal exit_options_menu
 
 	
 func _ready():
+
 	exit_button.pressed.connect(_on_exit_button_pressed)
 	
 	if !MusicaGlobal.music_player.playing:

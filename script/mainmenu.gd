@@ -9,7 +9,7 @@ extends CanvasLayer
 
 
 @onready var start_level = preload("res://Scenes/cinematica.tscn") as PackedScene
-@onready var options_scene = preload("res://Scenes/optionsmenu.tscn") as PackedScene
+@onready var options_scene = preload("res://Scenes/Settings_Tab_Container.tscn") as PackedScene
 
 func _ready():
 	handle_connecting_signals()

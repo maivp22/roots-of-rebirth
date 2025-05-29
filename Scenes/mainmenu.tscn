@@ -68,5 +68,5 @@ icon = ExtResource("5_5326e")
 flat = true
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -16.487
+volume_db = -40.585
 autoplay = true

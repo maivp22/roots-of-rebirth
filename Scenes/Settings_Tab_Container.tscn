@@ -1,8 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://clv2ypmwpd6fb"]
+[gd_scene load_steps=16 format=3 uid="uid://clv2ypmwpd6fb"]
 
 [ext_resource type="Script" uid="uid://dexdax6qfnipy" path="res://Scenes/settings_tab_container.gd" id="1_vry2l"]
+[ext_resource type="Texture2D" uid="uid://bkifswbkk7ds2" path="res://ui/jeje.png" id="2_nkcdg"]
+[ext_resource type="Texture2D" uid="uid://rfjwjhs84j20" path="res://ui/atras.png" id="3_2t5n7"]
 
 [sub_resource type="Theme" id="Theme_au2j8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2t5n7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2xdsb"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_58ikg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b5o0w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2e0py"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_um3q1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bosci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_halo2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xek4n"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_eqtx0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_japu0"]
 
 [node name="Settings_Tab_Container" type="Control"]
 layout_mode = 3
@@ -16,6 +40,20 @@ grow_vertical = 2
 size_flags_horizontal = 3
 theme = SubResource("Theme_au2j8")
 script = ExtResource("1_vry2l")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -54.0
+offset_top = -235.0
+offset_right = 80.0
+offset_bottom = 68.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nkcdg")
+expand_mode = 5
 
 [node name="TabContainer" type="TabContainer" parent="."]
 layout_mode = 1
@@ -364,33 +402,44 @@ horizontal_alignment = 1
 
 [node name="Exit_Button" type="Button" parent="."]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -4.0
-offset_top = 158.0
-offset_right = -4.0
-offset_bottom = 189.0
+anchors_preset = -1
+anchor_left = 0.315
+anchor_top = 0.069
+anchor_right = 0.315
+anchor_bottom = 0.069
+offset_left = -339.88
+offset_top = -145.158
+offset_right = -195.88
+offset_bottom = 8.842
 grow_horizontal = 2
 grow_vertical = 2
+rotation = -0.108918
 theme_override_font_sizes/font_size = 32
-text = "Volver"
+theme_override_styles/focus = SubResource("StyleBoxEmpty_2t5n7")
+theme_override_styles/disabled_mirrored = SubResource("StyleBoxEmpty_2xdsb")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_58ikg")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_b5o0w")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_2e0py")
+theme_override_styles/hover_mirrored = SubResource("StyleBoxEmpty_um3q1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_bosci")
+theme_override_styles/pressed_mirrored = SubResource("StyleBoxEmpty_halo2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_xek4n")
+theme_override_styles/normal_mirrored = SubResource("StyleBoxEmpty_eqtx0")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_japu0")
 flat = true
+expand_icon = true
 
-[node name="Label" type="Label" parent="."]
+[node name="TextureRect" type="TextureRect" parent="Exit_Button"]
 layout_mode = 1
-anchors_preset = 14
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = 3.0
-offset_top = -378.0
-offset_right = 3.0
-offset_bottom = -333.0
+anchor_bottom = 1.0
+offset_left = -3.48003
+offset_top = -32.5713
+offset_right = -47.48
+offset_bottom = -68.5713
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
-text = "Ajustes"
-horizontal_alignment = 1
-vertical_alignment = 1
+rotation = 0.112767
+texture = ExtResource("3_2t5n7")
+flip_h = true

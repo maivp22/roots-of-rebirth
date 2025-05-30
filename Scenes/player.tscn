@@ -1,18 +1,31 @@
-[gd_scene load_steps=43 format=3 uid="uid://dadalw62vr8ce"]
+[gd_scene load_steps=45 format=3 uid="uid://dadalw62vr8ce"]
 
+[ext_resource type="Resource" uid="uid://d1qg25pj82cdx" path="res://inventory/playerInventory.tres" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dm0cefhg5de1x" path="res://Player/char_a_p4_0bas_humn_v00.png" id="2_hqtel"]
-[ext_resource type="Script" uid="uid://covcks67j0uei" path="res://script/camera_2d.gd" id="3_h0d7r"]
 [ext_resource type="Texture2D" uid="uid://6d2kpcrci1hq" path="res://Player/char_a_p1_0bas_humn_v00.png" id="3_sweqy"]
-[ext_resource type="Script" uid="uid://budj0nt1vydr4" path="res://script/inventory.gd" id="4_vgqql"]
-[ext_resource type="Script" uid="uid://bluyopjauhv0r" path="res://script/inventory_ui.gd" id="5_fkybt"]
 
 [sub_resource type="GDScript" id="GDScript_onrkg"]
 script/source = "extends CharacterBody2D
 
+signal healthChanged
+
 const speed = 120
 var current_dir = \"none\"
 
+@onready var effects = $Effects
+@onready var hurtTimer = $hurtTimer
+@onready var hurtBox = $hurtBox
+@export var maxHealth = 3
+@onready var currentHealth: int = maxHealth
+
+@export var knockbackPower: int = 1500
+
+@export var inventory: Inventory
+
+var isHurt: bool = false
+
 func _ready():
+	effects.play(\"RESET\")
 	var skin_index = GameData.selected_skin_index
 	var skin_path = GameData.skin_paths[skin_index]
 	var frames = load(skin_path)
@@ -21,6 +34,25 @@ func _ready():
 
 func _physics_process(delta):
 	player_movement(delta)
+	if !isHurt:
+		for area in hurtBox.get_overlapping_areas():
+			if area.name == \"hitBox\":
+				hurtByEnemy(area)
+
+func hurtByEnemy(area):
+	currentHealth -= 1
+	if currentHealth < 0:
+		currentHealth = maxHealth
+
+	healthChanged.emit(currentHealth)
+	isHurt = true
+	
+	knockback(area.get_parent().velocity)
+	effects.play(\"hurtBlink\")
+	hurtTimer.start()
+	await hurtTimer.timeout
+	effects.play(\"RESET\")
+	isHurt = false
 
 func player_movement(delta):
 	
@@ -85,7 +117,23 @@ func play_anim(movement):
 			anim.play(\"front_walk\")
 		elif movement == 0:
 			anim.play(\"front_idle\")
-	
+
+func get_direction():
+	return current_dir
+
+
+func _on_hurt_box_area_entered(area: Area2D) -> void:
+	if area.has_method(\"collect\"):
+		area.collect(inventory)
+
+
+func knockback(enemyVelocity: Vector2):
+	var knockbackDirection = (enemyVelocity - velocity).normalized() * knockbackPower
+	velocity = knockbackDirection
+	move_and_slide()
+
+
+func _on_hurt_box_area_exited(area: Area2D) -> void: pass
 "
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_syoou"]
@@ -250,7 +298,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"back_walk",
-"speed": 7.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -284,7 +332,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"front_walk",
-"speed": 7.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -318,7 +366,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"left_walk",
-"speed": 7.0
+"speed": 9.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -352,36 +400,107 @@ animations = [{
 }],
 "loop": true,
 "name": &"right_walk",
-"speed": 7.0
+"speed": 9.0
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_i3pqv"]
-size = Vector2(13, 29)
+size = Vector2(13, 19)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_h0d7r"]
-radius = 22.0907
+[sub_resource type="GDScript" id="GDScript_vgqql"]
+script/source = "extends Camera2D
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fkybt"]
-size = Vector2(15, 40)
+# cuánto queremos acercar; valores menores = más cerca, mayores = más lejos
+@export var target_zoom: Vector2 = Vector2(2.5, 2.5)
+# velocidad de suavizado (pon 0 para cambio instantáneo)
+@export var smooth_speed: float = 5.0
+
+var _current_zoom: Vector2
+
+func _ready():
+	make_current()            # convierte esta cámara en la activa
+	_current_zoom = zoom      # guardamos el zoom inicial
+
+func _process(delta):
+	if smooth_speed > 0:
+		_current_zoom = _current_zoom.lerp(target_zoom, smooth_speed * delta)
+		zoom = _current_zoom
+	else:
+		zoom = target_zoom
+"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
+size = Vector2(18, 39)
+
+[sub_resource type="GDScript" id="GDScript_6t5aa"]
+
+[sub_resource type="Animation" id="Animation_fkybt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.956863, 0.156863, 0.2, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vgqql"]
+resource_name = "hurtBlink"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.956863, 0.156863, 0.2, 0.792157), Color(1, 0.984314, 0.980392, 0.588235)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3wgy"]
+_data = {
+&"RESET": SubResource("Animation_fkybt"),
+&"hurtBlink": SubResource("Animation_vgqql")
+}
 
 [node name="player" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 3
+collision_mask = 3
 up_direction = Vector2(0, 1)
 script = SubResource("GDScript_onrkg")
+inventory = ExtResource("1_6t5aa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+clip_children = 2
 z_index = -1
 position = Vector2(6.77626e-21, 0)
 scale = Vector2(1.39063, 1.32813)
 sprite_frames = SubResource("SpriteFrames_f6nf7")
-animation = &"right_walk"
+animation = &"right_idle"
+frame_progress = 0.170113
+
+[node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
+offset_left = -15.1011
+offset_top = -20.3293
+offset_right = 24.8989
+offset_bottom = 19.6707
+color = Color(0.956863, 0.156863, 0.2, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -1.5)
+position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_i3pqv")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position_smoothing_speed = 20.0
 drag_horizontal_enabled = true
 drag_vertical_enabled = true
 drag_vertical_offset = 0.09
@@ -392,22 +511,14 @@ drag_bottom_margin = 0.13
 editor_draw_screen = false
 editor_draw_limits = true
 editor_draw_drag_margin = true
-script = ExtResource("3_h0d7r")
+script = SubResource("GDScript_vgqql")
 
-[node name="player_hitbox" type="Area2D" parent="."]
+[node name="hurtBox" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player_hitbox"]
-position = Vector2(-1, -2)
-shape = SubResource("CircleShape2D_h0d7r")
-
-[node name="Inventory" type="Area2D" parent="."]
-script = ExtResource("4_vgqql")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Inventory"]
-light_mask = 0
-visibility_layer = 8
-position = Vector2(5.5, -3)
-shape = SubResource("RectangleShape2D_fkybt")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hurtBox"]
+visibility_layer = 3
+position = Vector2(0, -3.5)
+shape = SubResource("RectangleShape2D_vgqql")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -417,16 +528,21 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -57.0
-offset_top = -50.0
-offset_right = 57.0
 grow_horizontal = 2
 grow_vertical = 0
-script = ExtResource("5_fkybt")
+script = SubResource("GDScript_6t5aa")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI"]
 layout_mode = 2
 size_flags_vertical = 8
 
-[connection signal="area_entered" from="Inventory" to="Inventory" method="_on_area_entered"]
-[connection signal="item_added" from="Inventory" to="CanvasLayer/InventoryUI" method="_on_inventory_item_added"]
+[node name="Effects" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_x3wgy")
+}
+
+[node name="hurtTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
+[connection signal="area_exited" from="hurtBox" to="." method="_on_hurt_box_area_exited"]

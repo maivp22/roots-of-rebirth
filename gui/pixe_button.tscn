@@ -1,12 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://dvmd56nulfo8d"]
+[gd_scene load_steps=7 format=3 uid="uid://dvmd56nulfo8d"]
 
 [ext_resource type="Texture2D" uid="uid://bd0ax8e1116vk" path="res://Selector/Hover.png" id="1_eay8b"]
 [ext_resource type="FontFile" uid="uid://boqb58gh4foy4" path="res://Selector/wayfarers-toy-box.ttf" id="1_qekep"]
-[ext_resource type="Texture2D" uid="uid://slkfp20h2ljs" path="res://Selector/Hover@2x-1.png" id="2_uamjg"]
 [ext_resource type="Texture2D" uid="uid://b8vtx5vnps0hm" path="res://Selector/Default@2x-1.png" id="3_7slbk"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vkq16"]
-texture = ExtResource("2_uamjg")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_kt7s3"]
 texture = ExtResource("3_7slbk")

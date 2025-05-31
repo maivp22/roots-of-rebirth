@@ -569,6 +569,7 @@ radius = 85.0941
 size = Vector2(30, 51)
 
 [node name="Orc" type="CharacterBody2D"]
+process_mode = 1
 script = ExtResource("1_pbj7x")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

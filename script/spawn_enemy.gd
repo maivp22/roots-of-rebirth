@@ -24,6 +24,7 @@ func spawn():
 			random.randi_range(82, 1200),
 			random.randi_range(450, 1600)
 		)
+		enemy_instance.process_mode = Node.PROCESS_MODE_PAUSABLE
 		add_child(enemy_instance)
 
 		enemigos.append(enemy_instance)

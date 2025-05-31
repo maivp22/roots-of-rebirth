@@ -2,12 +2,13 @@ extends Node
 
 
 @onready var pause_menu = $CanvasLayer/PauseMenu
-
+@onready var inventoy_gui = $CanvasLayer/InventoyGui
 
 func _ready():
 	pause_menu.visible = false
 	pause_menu.pause_mode = Node.PROCESS_MODE_ALWAYS
-
+	inventoy_gui.opened.connect(on_inventoy_opened)
+	inventoy_gui.closed.connect(on_inventoy_closed)
 
 func _input(event):
 	if event.is_action_pressed("ui_cancel"):
@@ -32,3 +33,11 @@ func resume_game():
 	get_tree().paused = false
 	pause_menu.visible = false
 	MusicaGlobal.resume_music()
+	
+func on_inventoy_opened():
+	get_tree().paused = true  # Pausa el juego, pero no la música
+	print("Inventario abierto - juego pausado, música sigue")
+
+func on_inventoy_closed():
+	get_tree().paused = false
+	print("Inventario cerrado - juego reanudado")

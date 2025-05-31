@@ -45,9 +45,11 @@ var tween: Tween
 @onready var overlay = $FadeOverlay
 
 
+		
 func _ready():
 	start(0)
-	MusicaGlobal.music_player.stop()
+	MusicaGlobal.play_new_music("res://musica/cinematica.mp3")
+
 	
 # Empieza una escena cinematográfica
 func start(id):
@@ -96,7 +98,11 @@ func end_cinematic():
 	await fade_anim.animation_finished  
 	get_tree().change_scene_to_file("res://Scenes/characterselector.tscn")  
 
+
+
 func _input(event):
+	if event.is_action_pressed("ui_pause"):
+		MusicaGlobal.toggle_music()
 	if event.is_action_released("ui_accept"):
 		next()
 

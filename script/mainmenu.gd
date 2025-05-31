@@ -32,7 +32,9 @@ func on_options_pressed() -> void:
 	
 func _input(event):
 	if event.is_action_pressed("ui_accept"):
-				on_start_pressed()
+		on_start_pressed()
+	if event.is_action_pressed("ui_pause"):
+		MusicaGlobal.toggle_music()
 	elif event.is_action_pressed("ui_cancel"):
 		on_exit_pressed()
 		

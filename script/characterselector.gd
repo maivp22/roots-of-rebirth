@@ -36,6 +36,8 @@ func _on_button_ok_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/Mundo.tscn")
 
 func _input(event):
+	if event.is_action_pressed("ui_pause"):
+		MusicaGlobal.toggle_music()
 	if(event.is_action_pressed("ui_accept")):
 		_on_button_ok_pressed()
 	elif(event.is_action_pressed("ui_cancel")):

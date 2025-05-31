@@ -66,7 +66,3 @@ offset_bottom = 656.0
 theme = SubResource("Theme_5326e")
 icon = ExtResource("5_5326e")
 flat = true
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-volume_db = -40.585
-autoplay = true

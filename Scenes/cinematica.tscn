@@ -83,6 +83,16 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_sglcl")
 
+[node name="Saltar" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 841.0
+offset_top = 141.0
+offset_right = 924.0
+offset_bottom = 177.0
+theme_override_font_sizes/font_size = 20
+text = "Saltar"
+flat = true
+
 [node name="Button_next" type="Button" parent="Panel"]
 layout_mode = 0
 offset_left = 272.0
@@ -98,11 +108,11 @@ offset_left = 96.0
 offset_top = 24.0
 offset_right = 608.0
 offset_bottom = 80.0
-theme_override_fonts/normal_font = ExtResource("3_p6lri")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_chw6h")
 }
 
+[connection signal="pressed" from="Panel/Saltar" to="." method="_on_saltar_pressed"]
 [connection signal="pressed" from="Panel/Button_next" to="." method="_on_button_pressed"]

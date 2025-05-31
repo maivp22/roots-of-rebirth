@@ -27,10 +27,10 @@ const escenas = {
 		"fondo":"res://Cinematica/Escena4.png" ,
 		"dialogos": [
 			"En cada uno sobrevive una pequeña chispa de esperanza.",
-			"Si las encuentras... aún puedes restaurarlo todo.",
+			"Si encuentras eso fragmentos... aún puedes restaurarlo todo.",
 			"Tú has sido elegido. No para luchar, sino para sanar.",
 			"Completa las misiones de cada bioma. Devuelve lo que se perdió.",
-			"Cuando unas los fragmentos… la vida podrá volver"
+			"Cuando unas los fragmentos… la vida podrá volver. ¿Estás listo?"
 		]
 	},
 }
@@ -110,3 +110,9 @@ func _input(event):
 
 func _on_button_pressed() -> void:
 	next()
+
+
+func _on_saltar_pressed() -> void:
+	fade_anim.play("fade_to_black")          
+	await fade_anim.animation_finished  
+	get_tree().change_scene_to_file("res://Scenes/characterselector.tscn")

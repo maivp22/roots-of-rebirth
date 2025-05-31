@@ -5,6 +5,7 @@ var is_paused = false
 var current_tween = null
 
 func _ready():
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	music_player.stream = preload("res://musica/musica.mp3")
 	add_child(music_player)
 	music_player.volume_db = -30  # Empieza bajito

@@ -35,6 +35,5 @@ func _input(event):
 		on_start_pressed()
 	if event.is_action_pressed("ui_pause"):
 		MusicaGlobal.toggle_music()
-	elif event.is_action_pressed("ui_cancel"):
-		on_exit_pressed()
+
 		

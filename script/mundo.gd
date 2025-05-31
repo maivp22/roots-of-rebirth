@@ -1,4 +1,4 @@
-extends Node2D
+extends "res://script/NivelBase.gd"
 
 @onready var heartsContainer = $CanvasLayer/heartsContainer
 @onready var player = $player
@@ -9,9 +9,6 @@ func _ready() -> void:
 	heartsContainer.updateHearts(player.currentHealth)
 	player.healthChanged.connect(heartsContainer.updateHearts)
 	
-func _input(event):
-	if event.is_action_pressed("ui_pause"):
-		MusicaGlobal.toggle_music()
 
 func _on_inventoy_gui_closed() -> void:
 	get_tree().paused = false

@@ -1,4 +1,5 @@
 extends Control
+
 const escenas = {
 	0: {
 		"fondo":"res://Cinematica/Escena1.png" ,
@@ -105,6 +106,7 @@ func _input(event):
 		MusicaGlobal.toggle_music()
 	if event.is_action_released("ui_accept"):
 		next()
+
 
 func _on_button_pressed() -> void:
 	next()

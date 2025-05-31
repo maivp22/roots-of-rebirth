@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=4 uid="uid://cqiyd3lo2tmwl"]
+[gd_scene load_steps=44 format=4 uid="uid://cqiyd3lo2tmwl"]
 
 [ext_resource type="Script" uid="uid://b1ci4ajh5rcde" path="res://script/cosa_sangre.gd" id="1_5j50w"]
 [ext_resource type="Script" uid="uid://pycqgdh8dp8u" path="res://script/mundo.gd" id="1_vm5up"]
@@ -21,6 +21,7 @@
 [ext_resource type="Script" uid="uid://dc51mu5rjvunx" path="res://script/canvas_layer.gd" id="19_rehyo"]
 [ext_resource type="PackedScene" uid="uid://cjvaeo6jn16mk" path="res://Scenes/inventoy_gui.tscn" id="19_vm5up"]
 [ext_resource type="PackedScene" uid="uid://cnvq381d2gkyf" path="res://Scenes/Orc.tscn" id="21_rehyo"]
+[ext_resource type="PackedScene" uid="uid://qng4ttpf3scc" path="res://Scenes/pausa.tscn" id="22_048fi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_go570"]
 atlas = ExtResource("2_isuce")
@@ -12274,6 +12275,7 @@ pattern_0 = SubResource("TileMapPattern_pe05s")
 pattern_1 = SubResource("TileMapPattern_ubi47")
 
 [node name="Mundo1" type="Node2D"]
+process_mode = 3
 script = ExtResource("1_vm5up")
 metadata/_edit_vertical_guides_ = [832.0]
 
@@ -12375,6 +12377,8 @@ offset_left = -167.0
 offset_right = -167.0
 grow_horizontal = 0
 scale = Vector2(2, 2)
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("22_048fi")]
 
 [node name="InventoyGui" parent="CanvasLayer" instance=ExtResource("19_vm5up")]
 anchors_preset = 8

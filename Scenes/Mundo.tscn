@@ -12336,6 +12336,7 @@ tile_map_data = PackedByteArray("AAAEAAYACAAWADcAAAAFAAYACAAXADcAAAANAAcACAALADo
 tile_set = SubResource("TileSet_xsxc0")
 
 [node name="Props2" type="TileMapLayer" parent="."]
+visible = false
 light_mask = 3
 visibility_layer = 3
 texture_filter = 1

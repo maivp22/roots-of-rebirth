@@ -67,7 +67,7 @@ offset_bottom = -147.0
 grow_horizontal = 2
 grow_vertical = 2
 tab_alignment = 1
-current_tab = 5
+current_tab = 6
 
 [node name="Sonido" type="TabBar" parent="TabContainer"]
 visible = false
@@ -79,6 +79,10 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 36.0
+offset_top = -22.0
+offset_right = -138.0
+offset_bottom = -182.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/margin_left = 24
@@ -90,6 +94,15 @@ theme_override_constants/margin_bottom = 24
 layout_mode = 2
 theme_override_constants/separation = 64
 alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Sonido/MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Música:"
+
+[node name="VolumeSlider" type="HSlider" parent="TabContainer/Sonido/MarginContainer/VBoxContainer"]
+layout_mode = 2
+min_value = -50.0
+max_value = 0.0
 
 [node name="Gráficos" type="TabBar" parent="TabContainer"]
 visible = false
@@ -180,6 +193,7 @@ theme_override_constants/separation = 64
 alignment = 1
 
 [node name="Manual de Usuario" type="TabBar" parent="TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 5
 
@@ -247,26 +261,76 @@ Cuando completes todas las misiones y reconstruyas la estatua, restaurarás la T
 horizontal_alignment = 1
 
 [node name="Créditos" type="TabBar" parent="TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 6
 
-[node name="MarginContainer" type="MarginContainer" parent="TabContainer/Créditos"]
+[node name="ScrollContainer" type="ScrollContainer" parent="TabContainer/Créditos"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 24
-theme_override_constants/margin_top = 24
-theme_override_constants/margin_right = 24
-theme_override_constants/margin_bottom = 24
+horizontal_scroll_mode = 0
 
-[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Créditos/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="TabContainer/Créditos/ScrollContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
 theme_override_constants/separation = 64
 alignment = 1
+
+[node name="Label" type="Label" parent="TabContainer/Créditos/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "
+Créditos del Juego
+
+🎮 Roots of Rebirth – Desarrollado por GaiaCore Studios
+
+ Equipo de desarrollo:
+ Sebastián Campillo – Programador y Gerente de Proyectos
+ Luis Carrillo – Programador y Director de Diseño
+ Maileth Vallejo – Programadora y Directora de Documentación
+ Alejandra Sanz –  Programadora y Directora de UI/UX
+ Manuela Maiguel – Programadora y Directora de Pruebas"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="TabContainer/Créditos/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "🎵 Música utilizada:
+
+🎶 The Ultimate Weapon Deployed – Pokémon X & Y Original Soundtrack (Nintendo)
+
+🎶 Discurso Equipo Plasma – Pokémon Black & White Original Soundtrack (Nintendo)"
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="TabContainer/Créditos/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "🛠️ Herramientas utilizadas:
+
+Godot Engine 4.4.1
+GDScript
+Visual Studio Code
+Trello
+GitHub
+Netlify
+
+📅 Año de desarrollo: 2025
+🎓 Propósito: Educación y concientización ambiental
+
+Nota: La música utilizada pertenece a Nintendo y es usada únicamente con 
+fines educativos y no comerciales en el marco de este proyecto académico."
+horizontal_alignment = 1
+
+[node name="Label4" type="Label" parent="TabContainer/Créditos/ScrollContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 14
+text = "Juntos podemos marcar la diferencia, un paso a la vez.
+
+"
+horizontal_alignment = 1
 
 [node name="FAQ - Contacto" type="TabBar" parent="TabContainer"]
 visible = false
@@ -443,3 +507,5 @@ grow_vertical = 2
 rotation = 0.112767
 texture = ExtResource("3_2t5n7")
 flip_h = true
+
+[connection signal="value_changed" from="TabContainer/Sonido/MarginContainer/VBoxContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]

@@ -23,6 +23,7 @@ Global="*res://script/Global.gd"
 BrilloOverlay="*res://Scenes/BrilloOverlay.tscn"
 Soundmanager="*res://script/soundmanager.gd"
 
+
 [display]
 
 window/stretch/mode="viewport"

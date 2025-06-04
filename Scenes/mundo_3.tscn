@@ -9906,7 +9906,4 @@ shape = SubResource("CircleShape2D_pa3vl")
 [node name="player" parent="." instance=ExtResource("47_dcv32")]
 position = Vector2(-1406, 910)
 
-[node name="Camera2D" parent="player" index="2"]
-zoom = Vector2(0.1, 0.1)
-
 [editable path="player"]

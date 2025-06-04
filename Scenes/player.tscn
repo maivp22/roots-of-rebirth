@@ -15,7 +15,7 @@ var current_dir = \"none\"
 @onready var effects = $Effects
 @onready var hurtTimer = $hurtTimer
 @onready var hurtBox = $hurtBox
-@export var maxHealth = 3
+@export var maxHealth = 10
 @onready var currentHealth: int = maxHealth
 
 @export var knockbackPower: int = 1500

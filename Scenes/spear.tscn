@@ -18,6 +18,5 @@ shape = SubResource("RectangleShape2D_t4qxn")
 
 [node name="Sprite2D" parent="." index="1"]
 position = Vector2(0, 0)
-rotation = 0.359538
 scale = Vector2(0.91996, 0.858863)
 texture = ExtResource("2_i4w2o")

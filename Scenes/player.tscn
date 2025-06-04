@@ -36,6 +36,9 @@ func _ready():
 	$AnimatedSprite2D.play(\"front_idle\")
 
 func _physics_process(delta):
+	if get_tree().paused:
+		return  # Si el juego está pausado, no hacer nada
+	
 	player_movement(delta)
 	if Input.is_action_just_pressed(\"attack\"):
 		attack()
@@ -136,7 +139,6 @@ func knockback(enemyVelocity: Vector2):
 	var knockbackDirection = (enemyVelocity - velocity).normalized() * knockbackPower
 	velocity = knockbackDirection
 	move_and_slide()
-
 
 func _on_hurt_box_area_exited(area: Area2D) -> void: pass
 
@@ -272,11 +274,11 @@ region = Rect2(256, 448, 64, 64)
 atlas = ExtResource("3_sweqy")
 region = Rect2(320, 448, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_yt8w6"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
 atlas = ExtResource("2_hqtel")
 region = Rect2(64, 384, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nulgc"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
 atlas = ExtResource("2_hqtel")
 region = Rect2(128, 384, 64, 64)
 
@@ -410,14 +412,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_yt8w6")
+"texture": SubResource("AtlasTexture_6t5aa")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nulgc")
+"texture": SubResource("AtlasTexture_vgqql")
 }],
 "loop": true,
 "name": &"right_idle",
-"speed": 5.0
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -528,8 +530,8 @@ z_index = -1
 position = Vector2(6.77626e-21, 0)
 scale = Vector2(1.39063, 1.32813)
 sprite_frames = SubResource("SpriteFrames_f6nf7")
-animation = &"right_idle"
-frame_progress = 0.170113
+animation = &"right_walk"
+frame_progress = 0.0895953
 
 [node name="ColorRect" type="ColorRect" parent="AnimatedSprite2D"]
 offset_left = -15.1011

@@ -18,11 +18,9 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 
 GameData="*res://script/GameData.gd"
 MusicaGlobal="*res://script/musicaGlobal.gd"
-NavigationManage="*res://script/navigation_manage.gd"
-Global="*res://script/Global.gd"
 BrilloOverlay="*res://Scenes/BrilloOverlay.tscn"
 Soundmanager="*res://script/soundmanager.gd"
-
+Global="*res://script/Global.gd"
 
 [display]
 

@@ -1,10 +1,8 @@
-[gd_resource type="Resource" script_class="InventoryItem" load_steps=3 format=3 uid="uid://dve82d2qhboml"]
+[gd_resource type="Resource" script_class="InventoryItem" load_steps=2 format=3 uid="uid://dve82d2qhboml"]
 
-[ext_resource type="Script" uid="uid://brea4m34wdj3b" path="res://inventory/inventoryItem.gd" id="1_j7ibj"]
-[ext_resource type="Texture2D" uid="uid://c5wq0ds652hkm" path="res://items/hoe.png" id="2_vim3e"]
+[ext_resource type="Script" path="res://script/inventoryItem.gd" id="1_0m3ga"]
 
 [resource]
-script = ExtResource("1_j7ibj")
+script = ExtResource("1_0m3ga")
 name = "hoe"
-texture = ExtResource("2_vim3e")
 metadata/_custom_type_script = "uid://brea4m34wdj3b"

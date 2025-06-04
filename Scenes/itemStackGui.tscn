@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://b2more2h3fu8d"]
 
-[ext_resource type="Script" uid="uid://m4eo3du3rvrt" path="res://itemScript/itemStackGui.gd" id="1_872fg"]
+[ext_resource type="Script" path="res://itemScript/itemStackGui.gd" id="1_872fg"]
 [ext_resource type="FontFile" uid="uid://dhmk33ufh28q0" path="res://ui/NormalFont.ttf" id="2_mbcny"]
 
 [node name="Panel" type="Panel"]

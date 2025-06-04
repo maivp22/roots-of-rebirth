@@ -25,6 +25,8 @@ var current_dir = \"none\"
 var isHurt: bool = false
 
 func _ready():
+$AudioPasos.stream = Soundmanager.get_footstep_sound()
+
 	effects.play(\"RESET\")
 	var skin_index = GameData.selected_skin_index
 	var skin_path = GameData.skin_paths[skin_index]
@@ -543,6 +545,8 @@ libraries = {
 
 [node name="hurtTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioPasos" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="area_entered" from="hurtBox" to="." method="_on_hurt_box_area_entered"]
 [connection signal="area_exited" from="hurtBox" to="." method="_on_hurt_box_area_exited"]

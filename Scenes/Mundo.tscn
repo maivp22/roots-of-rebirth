@@ -19,9 +19,9 @@
 [ext_resource type="PackedScene" uid="uid://dcafj5v0shrje" path="res://Scenes/spear.tscn" id="14_r4d5n"]
 [ext_resource type="PackedScene" uid="uid://dt6kykdwaf84b" path="res://Scenes/hearts_container.tscn" id="19_r4d5n"]
 [ext_resource type="Script" uid="uid://dc51mu5rjvunx" path="res://script/canvas_layer.gd" id="19_rehyo"]
-[ext_resource type="PackedScene" uid="uid://cjvaeo6jn16mk" path="res://Scenes/inventoy_gui.tscn" id="19_vm5up"]
 [ext_resource type="PackedScene" uid="uid://cnvq381d2gkyf" path="res://Scenes/Orc.tscn" id="21_rehyo"]
 [ext_resource type="PackedScene" uid="uid://qng4ttpf3scc" path="res://Scenes/pausa.tscn" id="22_048fi"]
+[ext_resource type="PackedScene" uid="uid://ux6urv6lks07" path="res://Scenes/inventory_gui.tscn" id="22_ayh6w"]
 [ext_resource type="PackedScene" uid="uid://d1quxwsiqko2" path="res://Scenes/hotbar.tscn" id="23_ayh6w"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_go570"]
@@ -12441,21 +12441,20 @@ scale = Vector2(2, 2)
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("22_048fi")]
 
-[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("19_vm5up")]
+[node name="InventoryGui" parent="CanvasLayer" instance=ExtResource("22_ayh6w")]
 visible = false
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -174.0
-offset_top = -108.5
-offset_right = 174.0
-offset_bottom = 108.5
+offset_left = -165.0
+offset_top = -115.0
+offset_right = 165.0
+offset_bottom = 115.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
-size_flags_vertical = 4
 
 [node name="Hotbar" parent="CanvasLayer" instance=ExtResource("23_ayh6w")]
 anchors_preset = 7
@@ -12464,11 +12463,11 @@ anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
 offset_left = -133.0
-offset_top = -57.0
+offset_top = -56.0
 offset_right = 133.0
-offset_bottom = -7.0
+offset_bottom = -6.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[connection signal="closed" from="CanvasLayer/InventoryGui" to="." method="_on_inventoy_gui_closed"]
-[connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventoy_gui_opened"]
+[connection signal="closed" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_closed"]
+[connection signal="opened" from="CanvasLayer/InventoryGui" to="." method="_on_inventory_gui_opened"]

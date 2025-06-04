@@ -22,11 +22,13 @@ var current_dir = \"none\"
 @export var knockbackPower: float = 10
 
 @export var inventory: Inventory
+var was_moving_last_frame := false
 
 var isHurt: bool = false
 
 func _ready():
-	add_to_group(\"Player\")
+$AudioPasos.stream = Soundmanager.get_footstep_sound()
+add_to_group("Player")
 	effects.play(\"RESET\")
 	update_attack_area()
 	var skin_index = GameData.selected_skin_index
@@ -90,7 +92,15 @@ func player_movement(delta):
 		
 	update_attack_area()	
 	move_and_slide()
-	
+	var is_moving = velocity.length() > 0
+
+	if is_moving and !was_moving_last_frame:
+		if !$AudioPasos.playing:
+			$AudioPasos.play()
+	elif !is_moving:
+		$AudioPasos.stop()
+
+	was_moving_last_frame = is_moving
 
 func play_anim(movement):
 	var dir = current_dir
@@ -586,6 +596,8 @@ libraries = {
 
 [node name="hurtTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="AudioPasos" type="AudioStreamPlayer2D" parent="."]
 
 [node name="AttackArea" type="Area2D" parent="."]
 

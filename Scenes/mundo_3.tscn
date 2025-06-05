@@ -10835,9 +10835,6 @@ texture = ExtResource("43_e4lq1")
 position = Vector2(1779, 850)
 texture = ExtResource("43_e4lq1")
 
-[node name="player" parent="." instance=ExtResource("47_dcv32")]
-position = Vector2(-1406, 910)
-
 [node name="Enemys" type="Node2D" parent="."]
 
 [node name="Enemy_L3_1" parent="Enemys" instance=ExtResource("48_31vme")]
@@ -10990,4 +10987,5 @@ position = Vector2(540, -512)
 [node name="Enemy_L3_42" parent="Enemys" instance=ExtResource("50_6qsen")]
 position = Vector2(468, -829)
 
-[editable path="player"]
+[node name="player" parent="." instance=ExtResource("47_dcv32")]
+position = Vector2(-1406, 910)

@@ -8,8 +8,8 @@
 custom_minimum_size = Vector2(138, 90)
 layout_mode = 3
 anchors_preset = 0
-offset_right = 250.0
-offset_bottom = 153.0
+offset_right = 331.0
+offset_bottom = 233.0
 script = ExtResource("1_s28ss")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]

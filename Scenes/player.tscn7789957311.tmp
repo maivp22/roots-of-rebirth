@@ -1,8 +1,8 @@
-[gd_scene load_steps=44 format=3 uid="uid://dadalw62vr8ce"]
+[gd_scene load_steps=45 format=3 uid="uid://dadalw62vr8ce"]
 
+[ext_resource type="Resource" uid="uid://d1qg25pj82cdx" path="res://inventory/playerInventory.tres" id="1_6t5aa"]
 [ext_resource type="Texture2D" uid="uid://dm0cefhg5de1x" path="res://Player/char_a_p4_0bas_humn_v00.png" id="2_hqtel"]
 [ext_resource type="Texture2D" uid="uid://6d2kpcrci1hq" path="res://Player/char_a_p1_0bas_humn_v00.png" id="3_sweqy"]
-[ext_resource type="Script" uid="uid://drkrtj0n1en5r" path="res://script/hotbarPlayer.gd" id="4_vgqql"]
 
 [sub_resource type="GDScript" id="GDScript_onrkg"]
 script/source = "extends CharacterBody2D
@@ -12,8 +12,8 @@ signal healthChanged
 const speed = 120
 var current_dir = \"none\"
 
-@onready var hotbar = $CanvasLayer/InventoryUI/HBoxContainer
-@onready var inventory: Inventory = preload(\"res://inventory/playerInventory.tres\")
+@onready var inventory = preload(\"res://inventory/playerInventory.tres\")
+
 
 @onready var effects = $Effects
 @onready var hurtTimer = $hurtTimer
@@ -23,6 +23,7 @@ var current_dir = \"none\"
 
 @export var knockbackPower: int = 1500
 
+@export var inventory: Inventory
 
 var isHurt: bool = false
 
@@ -37,38 +38,13 @@ func _ready():
 
 func _physics_process(delta):
 	if get_tree().paused:
-		return
-
+		return  # Si el juego está pausado, no hacer nada
+		
 	player_movement(delta)
-
-	if is_spear_equipped():
-		if Input.is_action_just_pressed(\"use_item\"):
-			attack_with_spear()
-			
-
-func is_spear_equipped() -> bool:
-	var index = hotbar.currently_selected
-	if index < 0 or index >= inventory.slots.size():
-		return false
-	var slot = inventory.slots[index]
-	return slot.item != null and slot.item.name == \"spear\"
-
-
-func handle_spear_animation(delta):
-	match current_dir:
-		\"right\":
-			$AnimatedSprite2D.play(\"spear_right_walk\")
-		\"left\":
-			$AnimatedSprite2D.play(\"spear_left_walk\")
-		\"up\":
-			$AnimatedSprite2D.play(\"spear_back_walk\")
-		\"down\":
-			$AnimatedSprite2D.play(\"spear_front_walk\")
-
-func attack_with_spear():
-	print(\"Ataque con spear\")
-	$AnimatedSprite2D.play(\"spear_attack_\" + current_dir)
-
+	if !isHurt:
+		for area in hurtBox.get_overlapping_areas():
+			if area.name == \"hitBox\":
+				hurtByEnemy(area)
 
 func hurtByEnemy(area):
 	currentHealth -= 1
@@ -462,6 +438,8 @@ func _process(delta):
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vgqql"]
 size = Vector2(18, 39)
 
+[sub_resource type="GDScript" id="GDScript_6t5aa"]
+
 [sub_resource type="Animation" id="Animation_fkybt"]
 length = 0.001
 tracks/0/type = "value"
@@ -506,6 +484,9 @@ collision_layer = 3
 collision_mask = 3
 up_direction = Vector2(0, 1)
 script = SubResource("GDScript_onrkg")
+maxHealth = null
+knockbackPower = null
+inventory = ExtResource("1_6t5aa")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 clip_children = 2
@@ -558,11 +539,11 @@ anchor_right = 0.5
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 0
+script = SubResource("GDScript_6t5aa")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/InventoryUI"]
 layout_mode = 2
 size_flags_vertical = 8
-script = ExtResource("4_vgqql")
 
 [node name="Effects" type="AnimationPlayer" parent="."]
 libraries = {

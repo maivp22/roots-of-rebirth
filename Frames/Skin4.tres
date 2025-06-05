@@ -176,7 +176,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"front_idle",
-"speed": 9.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,

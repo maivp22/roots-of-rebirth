@@ -35,13 +35,19 @@ func insertSlot(index: int, inventorySlot: InventorySlot):
 
 
 func use_item_at_index(index: int):
-	if index < 0 || index >= slots.size() || !slots[index].item: return
-	
+	if index < 0 || index >= slots.size() or !slots[index].item:
+		return
+		
 	var slot = slots[index]
+	# No eliminar si el ítem es la spear
 	
-	if slot.amount > 1:
-		slot.amount -= 1
+	if slot.item.name == "spear":
 		updated.emit()
 		return
 	
-	remove_at_index(index)
+	if slot.amount > 1:
+		slot.amount -= 1
+	else:
+		remove_at_index(index)
+
+	updated.emit()

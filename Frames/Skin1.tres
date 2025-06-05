@@ -176,7 +176,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"front_idle",
-"speed": 9.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -211,6 +211,11 @@ animations = [{
 "loop": true,
 "name": &"left_idle",
 "speed": 9.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"left_idle_spear",
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,

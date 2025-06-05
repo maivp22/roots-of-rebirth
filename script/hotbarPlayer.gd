@@ -1,4 +1,4 @@
-extends Panel
+extends HBoxContainer
 
 @onready var inventory: Inventory = preload("res://inventory/playerInventory.tres")
 @onready var slots: Array = $Container.get_children()
@@ -21,7 +21,12 @@ func move_selector():
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("use_item"):
-		inventory.use_item_at_index(currently_selected)
-		
-	if event.is_action_pressed("move_selector"):
-		move_selector()
+		var slot = inventory.slots[currently_selected]
+	
+		# Si no hay item, no hacer nada
+		if !slot.item:
+			return
+	
+	# Si el item no es spear, se consume normalmente
+		if slot.item.name != "spear":
+			inventory.use_item_at_index(currently_selected)
